@@ -1,8 +1,8 @@
-﻿FROM alpine AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 USER $APP_UID
 WORKDIR /app
 
-expose 5000
+expose 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 RUN apk add clang binutils musl-dev build-base zlib-static
@@ -21,4 +21,5 @@ RUN dotnet publish "FilesHashApi.csproj" -c $BUILD_CONFIGURATION -r linux-musl-x
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_URLS "http://*:8080"
 ENTRYPOINT ["./FilesHashApi"]
