@@ -2,7 +2,7 @@
 USER $APP_UID
 WORKDIR /app
 
-expose 8080
+expose 5000
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 RUN apk add clang binutils musl-dev build-base zlib-static
