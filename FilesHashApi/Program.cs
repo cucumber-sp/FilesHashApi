@@ -9,5 +9,6 @@ builder.Services.AddSingleton<IFileHashProviderService, CachedFileHashProviderSe
 WebApplication app = builder.Build();
 
 app.MapControllers();
+app.Map("/", () => "FilesHashApi is running!");
 
 app.Run();
